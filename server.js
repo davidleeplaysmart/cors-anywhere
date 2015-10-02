@@ -1,10 +1,10 @@
 // Heroku defines the environment variable PORT, and requires the binding address to be 0.0.0.0
 var host = process.env.PORT ? '0.0.0.0' : '127.0.0.1';
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 18899;
 
 var cors_proxy = require('./lib/cors-anywhere');
 cors_proxy.createServer({
-    requireHeader: ['origin', 'x-requested-with'],
+    //requireHeader: ['origin', 'x-requested-with'],
     removeHeaders: [
         'cookie',
         'cookie2',
@@ -16,8 +16,9 @@ cors_proxy.createServer({
     ],
     httpProxyOptions: {
         // Do not add X-Forwarded-For, etc. headers, because Heroku already adds it.
-        xfwd: false
+        // xfwd: false
     }
 }).listen(port, host, function() {
     console.log('Running CORS Anywhere on ' + host + ':' + port);
 });
+~    
